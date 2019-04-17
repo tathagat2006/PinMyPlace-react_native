@@ -9,7 +9,7 @@ const placeList = props => {
       key={i}
       placename={place}
       onItemPressed={() => {
-        alert("Item Pressed - ID: " + i);
+        props.onItemDeleted(i);
       }}
     />
   ));
