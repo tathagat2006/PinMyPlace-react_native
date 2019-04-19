@@ -32,6 +32,13 @@ const reducers = (state = initialState, action) => {
         }),
         selectedPlace: null
       };
+    case SELECT_PLACE:
+      return {
+        ...state,
+        selectedPlace: state.places.find(place => {
+          return place.key === action.placeKey;
+        })
+      };
     default:
       return state;
   }
