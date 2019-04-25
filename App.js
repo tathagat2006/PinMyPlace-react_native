@@ -3,16 +3,29 @@ import React from "react";
 import AuthScreen from "./src/screens/Auth/Auth";
 import SharePlaceScreen from "./src/screens/SharePlace/SharePlace";
 import FindPlaceScreen from "./src/screens/FindPlace/FindPlace";
+import { Provider } from "react-redux";
+import configureStore from "./src/store/configureStore";
+
+const store = configureStore();
 
 // Register Screens
-Navigation.registerComponent("pinmyplaces.AuthScreen", () => AuthScreen);
+Navigation.registerComponent(
+  "pinmyplaces.AuthScreen",
+  () => AuthScreen,
+  store,
+  Provider
+);
 Navigation.registerComponent(
   "pinmyplaces.SharePlaceScreen",
-  () => SharePlaceScreen
+  () => SharePlaceScreen,
+  store,
+  Provider
 );
 Navigation.registerComponent(
   "pinmyplaces.FindPlaceScreen",
-  () => FindPlaceScreen
+  () => FindPlaceScreen,
+  store,
+  Provider
 );
 
 //Start App
