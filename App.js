@@ -6,6 +6,7 @@ import FindPlaceScreen from "./src/screens/FindPlace/FindPlace";
 import PlaceDetailScreen from "./src/screens/PlaceDetail/PlaceDetail";
 import { Provider } from "react-redux";
 import configureStore from "./src/store/configureStore";
+import SideDrawerScreen from "./src/screens/SideDrawer/SideDrawer";
 
 const store = configureStore();
 
@@ -31,6 +32,12 @@ Navigation.registerComponent(
 Navigation.registerComponent(
   "pinmyplaces.PlaceDetailScreen",
   () => PlaceDetailScreen,
+  store,
+  Provider
+);
+Navigation.registerComponent(
+  "pinmyplaces.SideDrawerScreen",
+  () => SideDrawerScreen,
   store,
   Provider
 );
