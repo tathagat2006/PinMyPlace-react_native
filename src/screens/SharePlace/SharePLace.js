@@ -1,8 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 
 import { addPlace } from "../../store/actions/index";
+import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
+import MainText from "../../components/UI/MainText/MainText";
+import HeadingText from "../../components/UI/HeadingText/HeadingText";
 
 class SharePlaceScreen extends Component {
   constructor(props) {
@@ -24,22 +34,49 @@ class SharePlaceScreen extends Component {
   };
   render() {
     return (
-      <View>
-        <Text>Share A Place With Us!</Text>
-        <View>
-          <Text>Image Preview!</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <MainText>
+            <HeadingText>Share A Place With Us!</HeadingText>
+          </MainText>
+          <View style={styles.placeholder}>
+            <Text>Image Preview!</Text>
+          </View>
+          <View style={styles.button}>
+            <Button title="Pick Image!" />
+          </View>
+          <View style={styles.placeholder}>
+            <Text>Map</Text>
+          </View>
+          <View style={styles.button}>
+            <Button title="Locate Me!" />
+          </View>
+          <DefaultInput placeholder="Place Name" />
+          <View style={styles.button}>
+            <Button title="Share The Place!" />
+          </View>
         </View>
-        <Button title="Pick Image!" />
-        <View>
-          <Text>Map</Text>
-        </View>
-        <Button title="Locate Me!" />
-        <TextInput placeholder="Place Name" />
-        <Button title="Share The Place!" />
-      </View>
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center"
+  },
+  button: {
+    margin: 8
+  },
+  placeholder: {
+    borderWidth: 1,
+    borderColor: "black",
+    backgroundColor: "#eee",
+    width: "80%",
+    height: 150
+  }
+});
 
 const mapDispatchToProps = dispatch => {
   return {
