@@ -19,7 +19,8 @@ const startTabs = () => {
             leftButtons: [
               {
                 icon: ImageSources[2],
-                title: "Menu"
+                title: "Menu",
+                id: "sideDrawerToggle"
               }
             ]
           }
@@ -33,7 +34,8 @@ const startTabs = () => {
             leftButtons: [
               {
                 icon: ImageSources[2],
-                title: "Menu"
+                title: "Menu",
+                id: "sideDrawerToggle"
               }
             ]
           }
