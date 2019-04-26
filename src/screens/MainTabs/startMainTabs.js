@@ -43,7 +43,7 @@ const startTabs = () => {
       ],
       drawer: {
         left: {
-          screen: "pinmyplaces.SideDrawerScreen"
+          screen: "pinmyplaces.SideDrawer"
         }
       }
     });
