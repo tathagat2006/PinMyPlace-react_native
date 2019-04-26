@@ -5,7 +5,8 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Image
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -13,6 +14,7 @@ import { addPlace } from "../../store/actions/index";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
 import MainText from "../../components/UI/MainText/MainText";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
+import imagePlaceHolder from "../../assets/image.jpg";
 
 class SharePlaceScreen extends Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class SharePlaceScreen extends Component {
             <HeadingText>Share A Place With Us!</HeadingText>
           </MainText>
           <View style={styles.placeholder}>
-            <Text>Image Preview!</Text>
+            <Image source={imagePlaceHolder} style={styles.previewImage} />
           </View>
           <View style={styles.button}>
             <Button title="Pick Image!" />
@@ -68,6 +70,10 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 8
+  },
+  previewImage: {
+    width: "100%",
+    height: "100%"
   },
   placeholder: {
     borderWidth: 1,
