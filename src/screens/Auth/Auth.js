@@ -21,6 +21,29 @@ class AuthScreen extends Component {
       pwContainerDirection: "column",
       pwContainerJustifyContent: "flex-start",
       pwWrapperWidth: "100%"
+    },
+    controls: {
+      email: {
+        value: "",
+        valid: false,
+        validationRules: {
+          isEmail: true
+        }
+      },
+      password: {
+        value: "",
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
+      confirmPassword: {
+        value: "",
+        valid: false,
+        validationRules: {
+          equalTo: "password"
+        }
+      }
     }
   };
   constructor(props) {
@@ -46,6 +69,21 @@ class AuthScreen extends Component {
   loginHandler = () => {
     startMainTabs();
   };
+
+  updateInputState = (key, value) => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          [key]: {
+            ...prevState.controls[key],
+            value: value
+          }
+        }
+      };
+    });
+  };
+
   render() {
     let headingText = null;
 
@@ -67,6 +105,8 @@ class AuthScreen extends Component {
             <DefaultInput
               placeholder="Your Email Address"
               style={styles.input}
+              value={this.state.controls.email.value}
+              onChangeText={val => this.updateInputState("email", val)}
             />
             <View
               style={{
@@ -75,12 +115,21 @@ class AuthScreen extends Component {
               }}
             >
               <View style={{ width: this.state.respStyles.pwWrapperWidth }}>
-                <DefaultInput placeholder="Password" style={styles.input} />
+                <DefaultInput
+                  placeholder="Password"
+                  style={styles.input}
+                  value={this.state.controls.password.value}
+                  onChangeText={val => this.updateInputState("password", val)}
+                />
               </View>
               <View style={{ width: this.state.respStyles.pwWrapperWidth }}>
                 <DefaultInput
                   placeholder="Confirm Password"
                   style={styles.input}
+                  value={this.state.controls.confirmPassword.value}
+                  onChangeText={val =>
+                    this.updateInputState("confirmPassword", val)
+                  }
                 />
               </View>
             </View>
