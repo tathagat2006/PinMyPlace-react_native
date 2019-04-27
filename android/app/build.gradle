@@ -143,6 +143,12 @@ dependencies {
     // implementation "com.facebook.react:react-native:+"  // From node_modules
     // compile project(':react-native-vector-icons')
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation(project(':react-native-maps')){
+       exclude group: 'com.google.android.gms', module: 'play-services-base'
+       exclude group: 'com.google.android.gms', module: 'play-services-maps'
+   }
+   implementation 'com.google.android.gms:play-services-base:10.0.1'
+   implementation 'com.google.android.gms:play-services-maps:10.0.1'
 implementation 'com.android.support:design:27.1.0' 
 implementation "com.facebook.react:react-native:+" // From node_modules
 compile fileTree(dir: "libs", include: ["*.jar"]) 
