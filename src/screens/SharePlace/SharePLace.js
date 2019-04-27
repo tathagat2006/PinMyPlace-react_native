@@ -11,10 +11,10 @@ import {
 import { connect } from "react-redux";
 
 import { addPlace } from "../../store/actions/index";
-import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
+import PlaceInput from "../../components/PlaceInput/PlaceInput";
 import MainText from "../../components/UI/MainText/MainText";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
-import imagePlaceHolder from "../../assets/image.jpg";
+import PickImage from "../../components/PickImage/PickImage";
 
 class SharePlaceScreen extends Component {
   constructor(props) {
@@ -41,19 +41,14 @@ class SharePlaceScreen extends Component {
           <MainText>
             <HeadingText>Share A Place With Us!</HeadingText>
           </MainText>
-          <View style={styles.placeholder}>
-            <Image source={imagePlaceHolder} style={styles.previewImage} />
-          </View>
-          <View style={styles.button}>
-            <Button title="Pick Image!" />
-          </View>
+          <PickImage />
           <View style={styles.placeholder}>
             <Text>Map</Text>
           </View>
           <View style={styles.button}>
             <Button title="Locate Me!" />
           </View>
-          <DefaultInput placeholder="Place Name" />
+          <PlaceInput />
           <View style={styles.button}>
             <Button title="Share The Place!" />
           </View>
