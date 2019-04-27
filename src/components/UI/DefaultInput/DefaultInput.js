@@ -5,8 +5,8 @@ const defaultInput = props => {
   return (
     <TextInput
       placeholder={props.placeholder}
+      {...props}
       style={[styles.input, props.style]}
-      underlineColorAndroid="transparent"
     />
   );
 };

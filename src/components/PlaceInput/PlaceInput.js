@@ -3,26 +3,14 @@ import { View, TextInput, Button, StyleSheet } from "react-native";
 
 import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
-class PlaceInput extends Component {
-  state = {
-    placename: ""
-  };
+const placeInput = props => {
+  return (
+    <DefaultInput
+      placeholder="Place Name"
+      value={props.placename}
+      onChangeText={props.onChangeText}
+    />
+  );
+};
 
-  placeNameChangedHandler = val => {
-    this.setState({
-      placename: val
-    });
-  };
-
-  render() {
-    return (
-      <DefaultInput
-        placeholder="Place Name"
-        value={this.state.placename}
-        onChangeText={this.placeNameChangedHandler}
-      />
-    );
-  }
-}
-
-export default PlaceInput;
+export default placeInput;
