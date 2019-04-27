@@ -45,10 +45,18 @@ const startTabs = () => {
           }
         }
       ],
+      tabsStyle: {
+        //for ios
+        tabBarSelectedButtonColor: "orange"
+      },
       drawer: {
         left: {
           screen: "pinmyplaces.SideDrawer"
         }
+      },
+      appStyle: {
+        //for android
+        tabBarSelectedButtonColor: "orange"
       }
     });
   });
