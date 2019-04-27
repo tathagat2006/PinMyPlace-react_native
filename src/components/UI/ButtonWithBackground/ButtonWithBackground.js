@@ -14,6 +14,7 @@ const buttonWithBackGround = props => {
       <Text>{props.children}</Text>
     </View>
   );
+
   if (Platform.OS === "android") {
     return (
       <TouchableNativeFeedback onPress={props.onPress}>
@@ -21,6 +22,7 @@ const buttonWithBackGround = props => {
       </TouchableNativeFeedback>
     );
   }
+
   return <TouchableOpacity onPress={props.onPress}>{content}</TouchableOpacity>;
 };
 
