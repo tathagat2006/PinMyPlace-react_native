@@ -25,20 +25,24 @@ class AuthScreen extends Component {
   };
   constructor(props) {
     super(props);
-    Dimensions.addEventListener("change", dims => {
-      this.setState({
-        respStyles: {
-          pwContainerDirection:
-            Dimensions.get("window").height > 500 ? "column" : "row",
-          pwContainerJustifyContent:
-            Dimensions.get("window").height > 500
-              ? "flex-start"
-              : "space-between",
-          pwWrapperWidth: Dimensions.get("window").height > 500 ? "100%" : "45%"
-        }
-      });
-    });
+    Dimensions.addEventListener("change", this.updateStyles);
   }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener("change", this.updateStyles);
+  }
+
+  updateStyles = dims => {
+    this.setState({
+      respStyles: {
+        pwContainerDirection: dims.window.height > 500 ? "column" : "row",
+        pwContainerJustifyContent:
+          dims.window.height > 500 ? "flex-start" : "space-between",
+        pwWrapperWidth: dims.window.height > 500 ? "100%" : "45%"
+      }
+    });
+  };
+
   loginHandler = () => {
     startMainTabs();
   };
