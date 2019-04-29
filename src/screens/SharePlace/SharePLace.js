@@ -83,10 +83,26 @@ class SharePlaceScreen extends Component {
       };
     });
   };
+
+  imagePickedHandler = image => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          image: {
+            value: image,
+            valid: true
+          }
+        }
+      };
+    });
+  };
+
   placeAddedHandler = () => {
     this.props.onAddPlace(
       this.state.controls.placeName.value,
-      this.state.controls.location.value
+      this.state.controls.location.value,
+      this.state.controls.image.value
     );
   };
   render() {
@@ -96,7 +112,7 @@ class SharePlaceScreen extends Component {
           <MainText>
             <HeadingText>Share a Place with us!</HeadingText>
           </MainText>
-          <PickImage />
+          <PickImage onImagePicked={this.imagePickedHandler} />
           <PickLocation onLocationPick={this.locationPickedHandler} />
           <PlaceInput
             placeData={this.state.controls.placeName}
@@ -141,7 +157,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddPlace: (placeName, location) => dispatch(addPlace(placeName, location))
+    onAddPlace: (placeName, location, image) =>
+      dispatch(addPlace(placeName, location, image))
   };
 };
 

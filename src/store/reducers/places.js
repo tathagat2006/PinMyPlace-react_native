@@ -14,8 +14,7 @@ const reducers = (state = initialState, action) => {
           key: Math.random(),
           name: action.placeName,
           image: {
-            uri:
-              "https://i.pinimg.com/originals/70/fc/0c/70fc0c9846423ccf3ff8506fd9268233.jpg"
+            uri: action.image.uri
           },
           location: action.location
         })
