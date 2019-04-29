@@ -25,8 +25,8 @@ class FindPlaceScreen extends Component {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
+
   onNavigatorEvent = event => {
-    // console.log(event);
     if (event.type === "NavBarButtonPress") {
       if (event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
@@ -43,6 +43,7 @@ class FindPlaceScreen extends Component {
       useNativeDriver: true
     }).start();
   };
+
   placesSearchHandler = () => {
     Animated.timing(this.state.removeAnim, {
       toValue: 0,
@@ -55,18 +56,20 @@ class FindPlaceScreen extends Component {
       this.placesLoadedHandler();
     });
   };
+
   itemSelectedHandler = key => {
-    const selectedPlace = this.props.places.find(place => {
+    const selPlace = this.props.places.find(place => {
       return place.key === key;
     });
     this.props.navigator.push({
       screen: "pinmyplaces.PlaceDetailScreen",
-      title: selectedPlace.name,
+      title: selPlace.name,
       passProps: {
-        selectedPlace: selectedPlace
+        selectedPlace: selPlace
       }
     });
   };
+
   render() {
     let content = (
       <Animated.View
@@ -91,7 +94,11 @@ class FindPlaceScreen extends Component {
     );
     if (this.state.placesLoaded) {
       content = (
-        <Animated.View style={{ opacity: this.state.placesAnim }}>
+        <Animated.View
+          style={{
+            opacity: this.state.placesAnim
+          }}
+        >
           <PlaceList
             places={this.props.places}
             onItemSelected={this.itemSelectedHandler}
