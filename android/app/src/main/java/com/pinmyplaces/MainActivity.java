@@ -2,6 +2,8 @@ package com.pinmyplaces;
 
 import com.facebook.react.ReactActivity;
 import com.reactnativenavigation.controllers.SplashActivity;
+import com.imagepicker.permissions.OnImagePickerPermissionsCallback;
+import com.facebook.react.modules.core.PermissionListener; 
 
 public class MainActivity extends SplashActivity {
 
