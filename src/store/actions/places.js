@@ -11,6 +11,7 @@ export const addPlace = (placeName, location, image) => {
       .catch(err => console.log(err))
       .then(res => res.json())
       .then(parsedRes => {
+        console.log(parsedRes);
         const placeData = {
           name: placeName,
           location: location,

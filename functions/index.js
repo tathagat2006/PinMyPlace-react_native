@@ -4,8 +4,8 @@ const fs = require("fs");
 const UUID = require("uuid-v4");
 
 const gcconfig = {
-  projectId: "pinmyplaces.json",
-  keyFilename: "pinmyplaces"
+  projectId: "pinmyplaces",
+  keyFilename: "pinmyplaces.json"
 };
 
 const { Storage } = require("@google-cloud/storage");
@@ -21,7 +21,7 @@ exports.storeImage = functions.https.onRequest((request, response) => {
       console.log(err);
       return response.status(500).json({ error: err });
     });
-    const bucket = gcs.bucket("gs://pinmyplaces.appspot.com");
+    const bucket = gcs.bucket("pinmyplaces.appspot.com");
     const uuid = UUID();
 
     return bucket.upload(
