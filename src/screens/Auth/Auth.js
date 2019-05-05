@@ -16,7 +16,7 @@ import startMainTabs from "../MainTabs/startMainTabs";
 import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
 import HeadingText from "../../components/UI/HeadingText/HeadingText";
 import MainText from "../../components/UI/MainText/MainText";
-import background from "../../assets/image1.jpg";
+import background from "../../assets/back.jpg";
 import ButtonWithBackground from "../../components/UI/ButtonWithBackground/ButtonWithBackground";
 import validate from "../../utility/validation";
 import { tryAuth } from "../../store/actions/index";
@@ -145,9 +145,7 @@ class AuthScreen extends Component {
 
     if (Dimensions.get("window").height > 500) {
       headingText = (
-        <MainText>
-          <HeadingText>Please Log In</HeadingText>
-        </MainText>
+        <MainText>{/* <HeadingText>Please Log In</HeadingText> */}</MainText>
       );
     }
     if (this.state.authMode === "signup") {
