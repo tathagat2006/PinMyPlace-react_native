@@ -9,7 +9,8 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from "react-native";
 import { connect } from "react-redux";
 import startMainTabs from "../MainTabs/startMainTabs";
@@ -142,6 +143,21 @@ class AuthScreen extends Component {
   render() {
     let headingText = null;
     let confirmPasswordControl = null;
+    let SubmitButton = (
+      <ButtonWithBackground
+        color="#29aaf4"
+        onPress={this.loginHandler}
+        disabled={
+          (!this.state.controls.confirmPassword.valid &&
+            this.state.authMode === "signup") ||
+          !this.state.controls.email.valid ||
+          !this.state.controls.password.valid
+        }
+        secureTextEntry
+      >
+        Submit
+      </ButtonWithBackground>
+    );
 
     if (Dimensions.get("window").height > 500) {
       headingText = (
@@ -161,6 +177,9 @@ class AuthScreen extends Component {
           />
         </View>
       );
+    }
+    if (this.props.isLoading) {
+      submitButton = <ActivityIndicator />;
     }
     return (
       <ImageBackground source={background} style={styles.backgroundImage}>
@@ -207,19 +226,7 @@ class AuthScreen extends Component {
               </View>
             </View>
           </TouchableWithoutFeedback>
-          <ButtonWithBackground
-            color="#29aaf4"
-            onPress={this.loginHandler}
-            disabled={
-              (!this.state.controls.confirmPassword.valid &&
-                this.state.authMode === "signup") ||
-              !this.state.controls.email.valid ||
-              !this.state.controls.password.valid
-            }
-            secureTextEntry
-          >
-            Submit
-          </ButtonWithBackground>
+          {SubmitButton}
         </KeyboardAvoidingView>
       </ImageBackground>
     );
@@ -253,6 +260,12 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = state => {
+  return {
+    isLoading: state.ui.isLoading
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onLogin: authData => dispatch(tryAuth(authData))
@@ -260,6 +273,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AuthScreen);
