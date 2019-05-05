@@ -42,8 +42,12 @@ export const addPlace = (placeName, location, image) => {
 };
 
 export const getPlaces = () => {
-  return dispatch => {
-    fetch("https://pinmyplaces.firebaseio.com/places.json")
+  return (dispatch, getState) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return;
+    }
+    fetch("https://pinmyplaces.firebaseio.com/places.json?auth=" + token)
       .then(res => res.json())
       .then(parsedRes => {
         const places = [];
