@@ -67,6 +67,7 @@ export const getPlaces = () => {
         );
       })
       .catch(() => {
+        console.log("hisajsdvahs");
         alert("No valid token found!");
       })
       .then(res => res.json())

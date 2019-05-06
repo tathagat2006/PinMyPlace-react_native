@@ -46,7 +46,7 @@ export const authStoreToken = (token, expiresIn) => {
   return dispatch => {
     dispatch(authSetToken(token));
     const now = new Date();
-    const expiryDate = now.getDate() + expiresIn * 1000;
+    const expiryDate = now.getTime() + expiresIn * 1000;
     console.log(now, new Date(expiryDate));
     AsyncStorage.setItem("pp:auth:token", token);
     AsyncStorage.setItem("pp:auth:expiryDate", expiryDate.toString());
@@ -63,7 +63,7 @@ export const authSetToken = token => {
 export const getAuthToken = () => {
   return (dispatch, getState) => {
     const promise = new Promise((resolve, reject) => {
-      const token = getState().token;
+      const token = getState().auth.token;
       if (!token) {
         let fetchedToken;
         AsyncStorage.getItem("pp:auth:token")
@@ -109,7 +109,7 @@ export const authAutoSignIn = () => {
 };
 
 export const authClearStorage = () => {
-  dispatch => {
+  return dispatch => {
     AsyncStorage.removeItem("pp:auth:token");
     AsyncStorage.removeItem("pp:auth:expiryDate");
   };
