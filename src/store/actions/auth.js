@@ -64,6 +64,10 @@ export const getAuthToken = () => {
         AsyncStorage.getItem("pp:auth:token")
           .catch(err => reject())
           .then(tokenFromStorage => {
+            if (!tokenFromStorage) {
+              reject();
+              return;
+            }
             dispatch(authSetToken(tokenFromStorage));
             resolve(tokenFromStorage);
           });
@@ -72,5 +76,15 @@ export const getAuthToken = () => {
       }
     });
     return promise;
+  };
+};
+
+export const authAutoSignIn = () => {
+  return dispatch => {
+    dispatch(getAuthToken())
+      .then(token => {
+        startMainTabs();
+      })
+      .catch(err => console.log("Failed to fetch token!"));
   };
 };

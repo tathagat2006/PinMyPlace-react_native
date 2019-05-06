@@ -6,9 +6,6 @@ export const addPlace = (placeName, location, image) => {
     let authToken;
     dispatch(uiStartLoading());
     dispatch(getAuthToken())
-      .catch(() => {
-        alert("No valid token found!");
-      })
       .then(token => {
         authToken = token;
         return fetch(
@@ -23,6 +20,9 @@ export const addPlace = (placeName, location, image) => {
             }
           }
         );
+      })
+      .catch(() => {
+        alert("No valid token found!");
       })
       .catch(err => {
         console.log(err);
