@@ -1,3 +1,3 @@
 export { addPlace, deletePlace, getPlaces } from "./places";
-export { tryAuth } from "./auth";
+export { tryAuth, getAuthToken } from "./auth";
 export { uiStartLoading, uiStopLoading } from "./ui";

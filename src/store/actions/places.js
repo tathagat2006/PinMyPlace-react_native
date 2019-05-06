@@ -1,15 +1,24 @@
 import { SET_PLACES, REMOVE_PLACE } from "./actionTypes";
-import { uiStartLoading, uiStopLoading } from "./index";
+import { uiStartLoading, uiStopLoading, getAuthToken } from "./index";
 
 export const addPlace = (placeName, location, image) => {
   return dispatch => {
     dispatch(uiStartLoading());
-    fetch("https://us-central1-pinmyplaces.cloudfunctions.net/storeImage", {
-      method: "POST",
-      body: JSON.stringify({
-        image: image.base64
+    dispatch(getAuthToken())
+      .catch(() => {
+        alert("No valid token found!");
       })
-    })
+      .then(token => {
+        return fetch(
+          "https://us-central1-pinmyplaces.cloudfunctions.net/storeImage",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              image: image.base64
+            })
+          }
+        );
+      })
       .catch(err => {
         console.log(err);
         alert("Something went wrong. Please try again!");
@@ -42,12 +51,16 @@ export const addPlace = (placeName, location, image) => {
 };
 
 export const getPlaces = () => {
-  return (dispatch, getState) => {
-    const token = getState().auth.token;
-    if (!token) {
-      return;
-    }
-    fetch("https://pinmyplaces.firebaseio.com/places.json?auth=" + token)
+  return dispatch => {
+    dispatch(getAuthToken())
+      .then(token => {
+        return fetch(
+          "https://pinmyplaces.firebaseio.com/places.json?auth=" + token
+        );
+      })
+      .catch(() => {
+        alert("No valid token found!");
+      })
       .then(res => res.json())
       .then(parsedRes => {
         const places = [];
@@ -77,10 +90,22 @@ export const setPlaces = places => {
 
 export const deletePlace = key => {
   return dispatch => {
-    dispatch(removePlace(key));
-    fetch("https://pinmyplaces.firebaseio.com/places/" + key + ".json", {
-      method: "DELETE"
-    })
+    dispatch(getAuthToken())
+      .catch(() => {
+        alert("No valid token found!");
+      })
+      .then(token => {
+        dispatch(removePlace(key));
+        return fetch(
+          "https://pinmyplaces.firebaseio.com/places/" +
+            key +
+            ".json?auth=" +
+            token,
+          {
+            method: "DELETE"
+          }
+        );
+      })
       .then(res => res.json())
       .then(parsedRes => {
         console.log("Done");
