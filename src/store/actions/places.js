@@ -3,19 +3,24 @@ import { uiStartLoading, uiStopLoading, getAuthToken } from "./index";
 
 export const addPlace = (placeName, location, image) => {
   return dispatch => {
+    let authToken;
     dispatch(uiStartLoading());
     dispatch(getAuthToken())
       .catch(() => {
         alert("No valid token found!");
       })
       .then(token => {
+        authToken = token;
         return fetch(
           "https://us-central1-pinmyplaces.cloudfunctions.net/storeImage",
           {
             method: "POST",
             body: JSON.stringify({
               image: image.base64
-            })
+            }),
+            headers: {
+              Authorization: "Bearer " + authToken
+            }
           }
         );
       })
@@ -32,10 +37,13 @@ export const addPlace = (placeName, location, image) => {
           location: location,
           image: parsedRes.imageUrl
         };
-        return fetch("https://pinmyplaces.firebaseio.com/places.json", {
-          method: "POST",
-          body: JSON.stringify(placeData)
-        });
+        return fetch(
+          "https://pinmyplaces.firebaseio.com/places.json?auth=" + authToken,
+          {
+            method: "POST",
+            body: JSON.stringify(placeData)
+          }
+        );
       })
       .then(res => res.json())
       .then(parsedRes => {
