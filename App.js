@@ -43,9 +43,10 @@ Navigation.registerComponent(
 );
 
 //Start App
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: "pinmyplaces.AuthScreen",
-    title: "Login"
-  }
-});
+export default () =>
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: "pinmyplaces.AuthScreen",
+      title: "Login"
+    }
+  });
