@@ -23,7 +23,7 @@ exports.storeImage = functions.https.onRequest((request, response) => {
   return cors(request, response, () => {
     if (
       !request.headers.authorization ||
-      !request.authorization.startsWith("Bearer ")
+      !request.headers.authorization.startsWith("Bearer ")
     ) {
       console.log("No token found!");
       response.status(403).json({ error: "Unauthorized" });
